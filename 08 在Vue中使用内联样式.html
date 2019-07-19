@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+1.v-bind绑定属性 书写成对象的形式
+    注意：如果键中的属性有-就需要用引号来包起来
+-->
+<h1 id="app" :style="{color:'red','font-size':'20px'}">Obito  Rin</h1>
+<!--<h1 id="app" :style="{fontSize:12+'px'}">Obito Rin</h1>-->
+
+<!--2. 将样式对象定义到 data 直接引用到:style中-->
+<!--<h1 id="app" :style="styleObj1">Obito Rin</h1>-->
+
+<!--3. 在:style中通过数组，引用多个 data 中的样式对象-->
+<!--<h1 id="app" :style="[styleObj1,styleObj2]">Obito Rin</h1>-->
+
+
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      styleObj1: {color: 'red', 'font-size': '20px'},
+      styleObj2: {'font-weight': '200'}
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .weight {
+            font-weight: 200;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .big {
+            font-size: 50px;
+        }
+        .happy {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<!--1.数组-->
+<!--<h1 id="app" :class="['red','weight']">Obito Rin</h1>-->
+
+<!--2.数组中三元表达式-->
+<!--<h1 id="app" :class="['red','weight',isbig?'big':'']">Obito Rin</h1>-->
+
+<!--3.数组中嵌套对象-->
+<!--<h1 id="app" :class="['red','weight',{'big':isbig}]">Obito Rin</h1>-->
+
+<!--4.数组中直接使用对象-->
+<h1 id="app" :class="classObj1">Obito Rin</h1>
+<!--<h1 id="app" :class="[classObj1, classObj2]">Obito Rin</h1>-->
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      isbig: true,
+      classObj1:{red:true,weight:true,big:false},
+      classObj2:{happy: true}
+    }
+  });
+</script>
+
+</body>
+</html>

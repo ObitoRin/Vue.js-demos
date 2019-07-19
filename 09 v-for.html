@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--1.循环普通的数组-->
+    <p v-for="item in list">{{ item }}</p>
+    <p v-for="(item, index) in list">第{{ item }}项---索引{{ index }}</p>
+
+    <!--    2.循环对象数组-->
+    <p v-for="item in listObj">{{ item }}</p> <!--循环整个对象-->
+    <p v-for="item in listObj">Id:{{item.id}}---名字:{{item.name}}</p><!--循环对象的ID和名字-->
+
+    <!--3.循环对象-->
+    <p v-for="(value, key, index) in user">
+        对象中的键{{ key }}---对象中的值{{ value }}---该项的索引{{ index }}
+    </p>
+
+    <!--4.迭代数字-->
+    <!--count 是从1开始的-->
+    <p v-for="count in 10">{{ count }}</p>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      list: [1, 2, 3, 4, 5],
+      listObj: [
+        {id: 1, name: 'zs1'},
+        {id: 2, name: 'zs2'},
+        {id: 3, name: 'zs3'},
+        {id: 4, name: 'zs4'}
+      ],
+      user: {
+        id: 1,
+        name: '带土',
+        gender: '男',
+        age: 20
+      }
+    }
+  });
+</script>
+</body>
+</html>

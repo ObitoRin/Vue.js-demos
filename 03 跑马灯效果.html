@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="start">开始</button>
+    <button @click="end">结束</button>
+    <p>{{ message }}</p>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '宇智波带土',
+      timeId: null
+    },
+    methods: {
+      start() {
+        if (this.timeId != null) return;
+        this.timeId = setInterval(() => {
+          let start = this.message.substring(0, 1);
+          let end = this.message.substring(1);
+          this.message = end + start;
+        }, 400);
+      },
+      end() {
+        clearInterval(this.timeId);
+        this.timeId = null;
+      }
+    }
+
+  });
+</script>
+</body>
+</html>

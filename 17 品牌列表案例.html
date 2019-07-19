@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <h1>添加品牌</h1>
+    <div class="form-inline form-group">
+        <div class="form-group">
+            <label>Id</label>
+            <input type="number" v-model="id" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" v-model="name" @keydown.f2="add" class="form-control">
+        </div>
+        <button @click="add" class="btn btn-primary">添加</button>
+        <div class="form-group">
+            <label>搜索名称关键字</label>
+            <input type="text" v-model="keywords" class="form-control">
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Ctime</td>
+            <td>Operation</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!--这里的search方法返回的就是一个数组 所以可以循环遍历-->
+        <tr v-for="(item, index) in search(keywords)" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.Ctime | time }}</td>
+            <!--            <td>{{ item.Ctime | time('yyyy-MM-dd') }}</td>-->
+            <td>
+                <a href="" @click.prevent="remove(index, item.id)">删除</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+
+
+<script>
+  /*定义全局过滤器
+  Vue.filter('过滤器名称',function (){});*/
+
+  /*自定义全局按键修饰符*/
+  Vue.config.keyCodes.f2 = 113;
+ 
+  /*
+  * 生命周期钩子：生命周期阶段
+  * 钩子函数：阶段函数       在自定义指令的时候有钩子函数
+  * */
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      list: [
+        {id: 1, name: '卡宴', Ctime: new Date()},
+        {id: 2, name: '帕拉梅拉', Ctime: new Date()}
+      ],
+      id: '',
+      name: '',
+      keywords: ''
+    },
+    methods: {
+      add() {
+
+        if (this.id.trim().length === 0 || this.name.trim().length === 0) {
+          window.alert('请输入ID或Name');
+          return;
+        }
+
+
+        // 如果输入的id已经存在则提示重新输入
+        //获取到所有的index  再循环比较id  有就提示
+        let oldId = [];
+        this.list.forEach(item => oldId.push(item.id));
+
+        if (oldId.indexOf(parseInt(this.id)) != -1) {
+          window.alert('序号已存在，请重新输入新的序号');
+          return;
+        } else {
+          let newData = {id: parseInt(this.id), name: this.name, Ctime: new Date()};
+          this.list.push(newData);
+          oldId.push(newData.id);
+          this.id = this.name = '';
+        }
+
+      },
+      remove(index, id) {
+        /*1.根据索引删除*/
+        this.list.splice(index, 1);
+        /*2.根据ID删除*/
+        /*this.list.some((item, i) => {
+          if(item.id === id){
+            this.list.splice(i, 1);
+          }
+        })*/
+      },
+      search(keywords) {
+        return this.list.filter(item => {
+          // 如果列表中有包含输入的关键字  就返回对应的列表
+          if (item.name.includes(keywords)) {
+            return item;
+          }
+        });
+      }
+    },
+    // 定义私有过滤器
+    filters: {
+      // 第二个参数默认值为空字符串
+      time(dateStr, pattern = '') {
+        let dt = new Date();
+        let y = dt.getFullYear();
+        let m = dt.getMonth() + 1;
+        let d = dt.getDate();
+
+        // 如果调用的时候传了第二个参数为yyyy-mm-dd 就显示年月日
+        if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+          return `${y}-${m}-${d}`
+        } else { //如果没传就显示年月日 时分秒
+          let hh = dt.getHours();
+          let mm = dt.getMinutes();
+          let ss = dt.getSeconds();
+          return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+        }
+      }
+    }
+
+  });
+</script>
+</body>
+</html>

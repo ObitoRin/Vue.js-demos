@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="number" v-model="num1">
+    <span>+</span>
+    <input type="number" v-model="num2">
+    <button @click="result = parseInt(num1) + parseInt(num2)">=</button>
+    <span>{{ result }}</span>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: '',
+      num2: '',
+      result: 0
+    }
+  });
+</script>
+</body>
+</html>

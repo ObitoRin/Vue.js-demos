@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="number" v-model="front">
+    <select v-model="option">
+        <option value="1">+</option>
+        <option value="2">-</option>
+        <option value="3">*</option>
+        <option value="4">/</option>
+    </select>
+    <input type="number" v-model="behind">
+    <button @click="end">=</button>
+    <strong>{{ result }}</strong>
+
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      front: 0,
+      behind: 0,
+      result: 0,
+      option: '1'
+    },
+    methods: {
+      end() {
+        switch (this.option) {
+          case '1' :
+            this.result = parseInt(this.front) + parseInt(this.behind);
+            break;
+          case '2' :
+            this.result = parseInt(this.front) - parseInt(this.behind);
+            break;
+          case '3' :
+            this.result = parseInt(this.front) * parseInt(this.behind);
+            break;
+          case '4' :
+            this.result = parseInt(this.front) / parseInt(this.behind);
+            break;
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Vue实例控制的app就是mvvm中的view视图层 v-->
+<div id="app">
+    <p>{{ message }}</p>
+    <div>
+        {{ message }}
+        <p>{{ message }}</p>
+    </div>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // new Vue 出来的实例对象app 就是mvvm中的 vm
+  const app = new Vue({
+    el: '#app', //el 就是要控制的元素(区域)
+    data: { //data 就是mvvm中的 model数据层 m,专门用来保存每个页面的数据
+      message: 'Hello Vue.js'
+    }
+  });
+</script>
+</body>
+</html>

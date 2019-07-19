@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <p>{{ message | msgFormat('哈','嘿') | msgFormat2('AAA')}}</p>
+    <p :style="{color:'red','font-size':'20px'} | styleObj('blue')">AAA</p>
+</div>
+
+<div id="app2">
+    <p>{{ msg | msgFormat }}</p>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  //调用语法: {{ name | 过滤器名称 }}
+  //定义语法: Vue.fliter('过滤器名称',function(data));
+  //过滤器中的function的第一个参数已经被规定死了 永远都是 管道符前面传递过来的数据
+  Vue.filter('msgFormat', function (data, arg1='', arg2='') {
+    return data.replace(/蒙奇/g, '波多卡斯' + arg1 + arg2);
+  });
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: '蒙奇 D 路飞，蒙奇 D 卡普，蒙奇 D 龙，波多卡斯 D 艾斯',
+    },
+    filters: {
+      msgFormat2(data, arg1) {
+        return data + arg1 + '-----';
+      },
+      styleObj(data, color) {
+        data.color = color;
+        return data;
+      }
+    }
+  });
+
+  new Vue({
+    el: '#app2',
+    data: {
+      msg: '蒙奇 D 路飞，蒙奇 D 卡普，'
+    }
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1 v-cloak>{{ message }}</h1>
+    <p v-text="message">asb</p>
+
+    <p>{{ content }}</p>
+    <p v-html="content"></p>
+    <p v-html="content">123</p>
+    <button title="按钮">按钮</button>
+    <!--    <button title="myTitle">按钮</button>-->
+    <button v-bind:title="myTitle" v-on:click="show">按钮</button>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+      el: '#app',
+    data: {
+      message: 'ObitoRin',
+      content: '<h1>哈哈</h1>',
+      myTitle: '自定义title'
+    },
+    methods: {
+      show: function () {
+        alert('ObitoRin');
+      },
+
+    }
+  });
+
+</script>
+</body>
+</html>

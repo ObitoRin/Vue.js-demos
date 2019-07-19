@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .delete {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<!--<div id="app">
+    <h1>Todo</h1>
+    <p><span>{{ list.filter(item => !item.checked).length }}</span> of <span>{{ list.length }}</span> <span>remaning [archive]</span>
+    </p>
+
+    <p v-for="(item, index) in list">
+        <input type="checkbox" v-model="item.checked">
+
+        <span v-bind:class="{delete:item.checked}">{{ item.name }}</span>
+
+        <button v-on:click="remove(index)">X</button>
+    </p>
+
+    <input type="text" v-model="text" @keydown.enter="add">
+    <button @click="add">Add</button>
+</div>-->
+<div id="app">
+    <h1>Todo</h1>
+
+    <p><span>{{ todos.filter( (item) => !item.checked).length }}</span>of <span>{{ todos.length }}</span>remaning
+        [archive]</p>
+
+    <p v-for="(item, index) in todos">
+        <input type="checkbox" v-model="item.checked">
+        <span v-bind:class="{ delete:item.checked }">{{ item.name }}</span>
+        <button @click="remove(index)">X</button>
+    </p>
+    <input type="text" v-model="addText" v-on:keydown.enter="add">
+    <button @click="add">Add</button>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<!--<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      list: [
+        {id: 1, name: '小樱', checked: true},
+        {id: 2, name: '纲手', checked: false},
+        {id: 3, name: '带土', checked: false},
+        {id: 4, name: '琳', checked: false},
+        {id: 5, name: '鸣人', checked: true}
+      ],
+      text: ''
+    },
+    methods: {
+      remove(index) {
+        this.list.splice(index, 1);
+      },
+      add() {
+        const text = this.text.trim();//用户添加的文本去除空格
+
+        if (text.length === 0) return; //非空验证
+
+        this.list.push({
+          id: this.list[this.list.length - 1].id + 1,
+          name: text,
+          checked: false
+        });
+
+        this.text = '';
+      }
+    }
+  });
+</script>-->
+<script>
+  const todos = [
+    {id: 1, name: '纲手', checked: true},
+    {id: 2, name: '小樱', checked: false},
+    {id: 3, name: '带土', checked: false},
+    {id: 4, name: '琳', checked: false},
+    {id: 5, name: '鸣人', checked: true}
+  ];
+  new Vue({
+    el: '#app',
+    data: {
+      todos,
+      addText: ''
+    },
+    methods: {
+      add() {
+        const text = this.addText.trim();
+
+        if (text.length === 0) return;
+
+        const todos = this.todos;
+
+        if (todos.length === 0) {
+          todos.push({
+            id: 1,
+            name: text,
+            checked: false
+          });
+        } else {
+          todos.push({
+            id: todos[todos.length - 1].id + 1,
+            name: text,
+            checked: false
+          });
+        }
+
+        this.addText = '';
+      },
+      remove(index) {
+
+        this.todos.splice(index, 1);
+      }
+    }
+  });
+
+ /* (function () {
+    let newList =  todos.filter((value, index, array) =>
+      value.name === '带土'
+    );
+    console.log(newList);
+  })();*/
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <span v-bind:title="message">xx</span>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      message: '页面加载于' + Date.toLocaleString(),
+    }
+  });
+
+
+</script>
+
+</body>
+</html>

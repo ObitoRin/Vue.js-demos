@@ -93,7 +93,6 @@
 
         if (oldId.indexOf(parseInt(this.id)) != -1) {
           window.alert('序号已存在，请重新输入新的序号');
-          return;
         } else {
           let newData = {id: parseInt(this.id), name: this.name, Ctime: new Date()};
           this.list.push(newData);

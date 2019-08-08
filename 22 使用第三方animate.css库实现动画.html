@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../lib/animate.css">
+</head>
+<body>
+<div id="app">
+    <input type="button" value="toggle" @click="flag=!flag">
+
+    <!-- 使用第三方animate动画库,给需要动画的元素加上animated类 -->
+
+    <!--    <transition enter-active-class="animated bounceIn"  leave-active-class="animated bounceOut">
+            <h3 v-show="flag">这是一个h3</h3>
+        </transition>-->
+
+    <!--animated加在动画类样式和元素类样式都行-->
+    <!--<transition enter-active-class="bounceIn" leave-active-class="bounceOut">
+        <h3 v-show="flag" class="animated">这是一个h3</h3>
+    </transition>-->
+
+
+    <!--使用v-bind:duration  设置入场和离场动画的时间/也可以分别设置-->
+    <!--    v-bind:duration="200"-->
+    <transition
+            enter-active-class="bounceIn"
+            leave-active-class="bounceOut"
+            v-bind:duration="{ enter: 200, leave: 800 }"
+    >
+        <h3 v-show="flag" class="animated">这是一个h3</h3>
+    </transition>
+
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      flag: false
+    }
+  });
+</script>
+</body>
+</html>

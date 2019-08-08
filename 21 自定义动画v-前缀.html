@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .v-enter, .v-leave-to {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+
+    .v-enter-active, .v-leave-active {
+        transition: all 0.8s;
+    }
+
+
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: all 0.8s;
+    }
+</style>
+<body>
+<div id="app">
+    <input type="button" value="toggle" @click="flag=!flag">
+    <transition>
+        <h3 v-show="flag">这是一个h3</h3>
+    </transition>
+    <br>
+    <input type="button" value="toggle2" @click="flag2=!flag2">
+    <transition name="fade">
+        <h6 v-show="flag2">这是一个h6</h6>
+    </transition>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      flag: false,
+      flag2: false
+    }
+  });
+</script>
+</body>
+</html>

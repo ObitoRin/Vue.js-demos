@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="node_modules/vue/dist/vue.js"></script>
+<style>
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(80px);
+    }
+
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 0.5s;
+    }
+</style>
+<body>
+
+<div id="app">
+    <button @click="flag=!flag">toggle</button>
+    <transition>
+        <h3 v-show="flag">XXXXXXX</h3>
+    </transition>
+
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      flag: false
+    }
+  });
+</script>
+</body>
+</html>

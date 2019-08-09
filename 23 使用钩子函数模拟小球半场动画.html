@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .ball {
+            width: 15px;
+            height: 15px;
+            background-color: yellow;
+            border-radius: 50%;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="加入购物车" @click="flag=!flag">
+    <!--这些钩子函数可以结合 CSS transitions/animations 使用，也可以单独使用。-->
+    <transition
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            @after-enter="afterEnter"
+    >
+
+        <div class="ball" v-show="flag"></div>
+    </transition>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      flag: false
+    },
+    methods: {
+      /*
+      * el就是需要做动画的元素
+      *
+      * enter事件中的 处理函数的第二参数就是afterEnter函数
+      * */
+      beforeEnter(el) {
+        el.style.transform = 'translate(0,0)';
+      },
+
+      enter: function (el,done) {
+        el.offsetWidth;  el.offsetWidth;  //这句话没有实际的作用，但是如果不写，出不来动画效果  可以认为el.offsetWidth会强制动画刷新，使用offsetTop这些都行
+        el.style.transform = 'translate(150px,450px)';
+        el.style.transition = 'all 1s ease';
+        done();
+      },
+      afterEnter(el) {
+        this.flag = !this.flag;//隐藏小球
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <my-com></my-com>
+</div>
+<template id="tpl">
+    <h3>这是全局组件---{{ message }}</h3>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 1.组件有自己的data数据
+    * 2.组件中的data是一个函数，Vue实例的data是一个对象
+    * 3.组件中的data是个函数之外，函数内部还必须返回一个对象
+    * 4.组件中的data数据的使用方式和Vue实例的data使用方式完全一样
+    * */
+    Vue.component('myCom',Vue.extend({
+      template: '<h3>这是全局组件---{{ message }}</h3>',
+      // template:'#tpl',
+      data: function (){
+        return {
+          message: '这是组件中data定义的数据'
+        }
+      }
+    }));
+  new Vue({
+    el: '#app'
+  });
+</script>
+</body>
+</html>

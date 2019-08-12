@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <my-com3></my-com3>
+</div>
+<template id="temp">
+    <div>
+        <!--<span></span>-->
+        <h1>这是在外部定义的组件结构</h1>
+    </div>
+</template>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  Vue.component('myCom3', {
+    template: '#temp'
+  });
+  new Vue({
+    el: '#app'
+  });
+</script>
+</body>
+</html>

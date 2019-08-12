@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <zi-zeng></zi-zeng>
+    <zi-zeng></zi-zeng>
+    <zi-zeng></zi-zeng>
+</div>
+<template id="tpl">
+    <div>
+        <input type="button" value="+1" @click="increment">
+        <p>值：{{ count }}</p>
+
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  var countObj = {count: 0};
+  //加数器组件
+  Vue.component('ziZeng', {
+    template: '#tpl',
+    data: function () {
+      return {
+        count:0
+      }
+    },
+    methods: {
+      increment() {
+        this.count++;
+      }
+    }
+  });
+  new Vue({
+    el: '#app'
+  });
+</script>
+</body>
+</html>

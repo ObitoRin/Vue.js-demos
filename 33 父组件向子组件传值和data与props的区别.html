@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--在组件的标签中 使用v-bind绑定数据 把父组件的数据传递给子组件-->
+    <com v-bind:parent="message"></com>
+    <!--    <my-com></my-com>-->
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  // Vue.component('myCom',{
+  //   template: '<h1>全局组件</h1>'
+  // });
+  new Vue({
+    el: '#app',
+    data: {
+      message: '父组件的数据'
+    },
+    components: {
+      com: {
+        data() {
+          return {
+            title:'' //data中的数据是直接定义的或者是在外部获取的
+          }
+        },
+        template: '<h1>子组件数据---{{ parent }}</h1>',
+        props: ['parent']//父组件传给子组件的数据在props中  ||  props的数据是父组件传过来了的
+      }
+    }
+  });
+</script>
+</body>
+</html>

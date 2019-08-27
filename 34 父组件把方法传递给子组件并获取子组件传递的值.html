@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--父组件向子组件传递方法使用的是事件绑定机制: v-on 当我们自定义了一个事件属性之后，
+        子组件就能过通过某型方法，来调用传进去的这个方法了-->
+    <com2 v-on:func="show"></com2>
+</div>
+
+<template id="tpl">
+    <div>
+        <h1>这是子组件</h1>
+        <input type="button" value="这个是子组件的按钮，点击它，触发父组件传过来的func方法" v-on:click="myclick">
+    </div>
+</template>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+  //子组件         定义一个字面量组件模板对象
+  var com2 = {
+    template: '#tpl',
+    data() {
+      return {
+        sonmsg: {
+          name: 'aaa',
+          age: 5
+        }
+      }
+    },
+    methods: {
+      myclick() {
+        //当点击子组件方法的时候，如何拿到父组件传递过来的func方法？
+        //emit是触发的意思
+        // this.$emit('func', 123);
+        this.$emit('func', this.sonmsg);
+      }
+    }
+  };
+  //父组件
+  new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      show(data) {
+        console.log('调用了父组件的方法，并获取到了子组件传过来的值:' + data);
+        console.log(data);
+      }
+    },
+    components: {
+      com2
+    }
+  });
+
+</script>
+</body>
+</html>

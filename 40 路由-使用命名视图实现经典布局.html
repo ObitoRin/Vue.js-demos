@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <router-view></router-view>
+    <router-view name="left"></router-view>
+    <router-view name="main"></router-view>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="../lib/vue-router.js"></script>
+<script>
+
+  //组件模板对象
+  var header = {
+    template: '<h1>头部区域</h1>'
+  };
+
+  var leftBox = {
+    template: '<h1>Left侧边栏区域</h1>'
+  };
+
+  var mainBox = {
+    template: '<h1>Main主体区域</h1>'
+  };
+
+  //创建路由对象
+  var router = new VueRouter({
+    //路由匹配规则
+    routes: [
+      {
+        path: '/',
+        components: {
+          'default': header,
+          'left': leftBox,
+          'main': mainBox
+        }
+
+      }
+    ]
+  });
+
+  new Vue({
+    el: '#app',
+    data: {},
+    methods: {},
+    router
+  });
+</script>
+</body>
+</html>

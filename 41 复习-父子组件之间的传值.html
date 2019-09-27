@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--子组件通过v=bind绑定获取到父组件的数据-->
+    <!--父组件向子组件传递一个方法，子组件把数据作为形参传给父组件-->
+    <com1 :parentmsg="message" @func="getSonMessage"></com1>
+    <!--    <com1 v-bind:parentmoney="money" v-on:func="getSonMoney"></com1>-->
+    {{ sonMessage }}
+</div>
+
+<template id="tpl">
+    <div>
+        <h1>这是子组件---父组件传的值：{{ parentmsg }}</h1>
+        <input type="button" value="子传父" @click="myClick">
+    </div>
+</template>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+  //子组件
+  /* var com1 = {
+     template: '#tpl',
+     props: ['parentmsg'],
+     data() {
+       return {
+         sonMessage: 'son to father'
+       }
+     },
+     methods: {
+       myClick(){
+         this.$emit('func',this.sonMessage);
+       },
+     }
+   };*/
+
+  //父组件
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'father to son',
+      sonMessage: ''
+    },
+    methods: {
+      getSonMessage(data) {
+        this.sonMessage = data;
+        console.log(this.sonMessage);
+      }
+    },
+    components: {
+      com1:{
+        template: '#tpl',
+        //子组件获取到的数据在props属性中 需要用引号包起来
+        props: ['parentmsg'],
+        data() {
+          return {
+            sonMessage: 'son to father'
+          }
+        },
+        methods: {
+          myClick(){
+            this.$emit('func',this.sonMessage);
+          },
+        }
+      }
+    }
+
+  });
+</script>
+</body>
+</html>

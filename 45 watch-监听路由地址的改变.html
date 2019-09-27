@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+    <router-view></router-view>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="../lib/vue-router.js"></script>
+<script>
+
+  var login = {
+    template: '<h1>登录组件</h1>'
+  };
+
+  var register = {
+    template: '<h1>注册组件</h1>'
+  };
+
+  var router = new VueRouter({
+    routes: [
+      {path: '/', redirect: '/login'},
+      {path: '/login', component: login},
+      {path: '/register', component: register}
+    ],
+    linkActiveClass: 'myActive'
+  });
+
+  new Vue({
+    el: '#app',
+    data: {},
+    methods: {},
+    // router: router
+    router,
+    watch: {
+      //keyup这些事件监听不了一些非DOM元素，比如路由，就只能用watch来监听非DOM元素的改变
+      // this.$route.path 不行
+      '$route.path': function (newValue, oldValue) {
+        if (newValue === '/login') {
+          console.log('欢迎进入登录组件');
+        } else if (newValue === '/register') {
+          console.log('欢迎进入注册组件');
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

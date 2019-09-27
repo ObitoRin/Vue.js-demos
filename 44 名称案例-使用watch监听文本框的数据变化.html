@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="firstname">+
+    <input type="text" v-model="lastname">=
+    <input type="text" v-model="fullname">
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      firstname: '',
+      lastname: '',
+      fullname: ''
+    },
+    methods: {},
+    watch: {
+      //watch属性中的函数(函数名称和数据的名称对应)有两个形参，第一个是新的数据，第二个是老的数据
+      'firstname'(newValue, oldValue) {
+        // console.log(newValue+'---'+oldValue);
+        // this.fullname = this.firstname + '-' + this.lastname;
+        this.fullname = newValue + '-' + this.lastname;
+      },
+      'lastname'(newValue, oldValue) {
+        this.fullname = this.firstname + '-' + newValue;
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
